@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Welcome to OCBank</h1>
+    <h3><a href="{{ path('home') }}">View the Bank!</a></h3>
+
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - Home
+{% endblock %}
+
