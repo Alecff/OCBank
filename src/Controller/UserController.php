@@ -29,7 +29,6 @@ class UserController extends AbstractController
         $form = $this->createForm(RegisterFormType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($form->getData());
             $userExists = $em->getRepository(User::class)
                 ->findOneBy(['username' => $form->getData()['username']]);
             if (!$userExists) {
@@ -55,8 +54,6 @@ class UserController extends AbstractController
 
     /**
      * @Route("/", name="home")
-     *
-     * @param UserInterface|null $user
      *
      * @return Response
      */

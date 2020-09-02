@@ -1,10 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        h1 {
+            color: #F5871F;
+            text-shadow: 2px 2px 8px #111111;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     {{ parent() }}
-    <h1>Welcome to OCBank</h1>
-    <h3><a href="{{ path('home') }}">View the Bank!</a></h3>
+    <div class="main">
+        <h1>Welcome to OCBank</h1>
+        <h3><a href="{{ path('home') }}">View the Bank!</a></h3>
 
+    </div>
 {% endblock %}
 
 {% block title %}

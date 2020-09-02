@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.30.2",
+    "bootstrap": "^4.5.2",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "webpack-notifier": "^1.8.0"
+  },
+  "dependencies": {
+    "autocomplete.js": "^0.37.1"
+  }
+}

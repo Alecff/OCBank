@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Add a new OC Result</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.CPU) }}
+    {{ form_row(form.MaxSpeed) }}
+    {{ form_row(form.MaxSpeedVoltage) }}
+    {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+
+{% endblock %}
