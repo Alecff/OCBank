@@ -2,19 +2,79 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+    <script>
+        let $collectionHolder;
+        let $addNodeButton = $('<button type="button" class="add_node_link"> Add a Data-point</button>');
+        let $newLink = $('<li></li>').append($addNodeButton);
+
+        jQuery(document).ready(function () {
+            $collectionHolder = $('ul.nodes');
+
+            $collectionHolder.find('li').each(function () {
+                addNodeFormDeleteLink($(this));
+            })
+            $collectionHolder = $('ul.nodes');
+
+            $collectionHolder.append($newLink);
+
+            $collectionHolder.data('index', $collectionHolder.find('input').length);
+
+            $addNodeButton.on('click', function (e) {
+                addNodeForm($collectionHolder, $newLink);
+            });
+        });
+
+        function addNodeForm() {
+            let prototype = $collectionHolder.data('prototype');
+
+            let index = $collectionHolder.data('index');
+
+            let newForm = prototype;
+
+            newForm = newForm.replace(/__name__/g, index);
+
+            $collectionHolder.data('index', index + 1);
+
+            let $newForm = $('<li></li>').append(newForm);
+            $newLink.before($newForm);
+
+            addNodeFormDeleteLink($newForm);
+        }
+
+        function addNodeFormDeleteLink($nodeForm) {
+            let $removeFormButton = $('<button type="button">Delete this Data-point</button>');
+            $nodeForm.append($removeFormButton);
+
+            $removeFormButton.on('click', function (e) {
+                $nodeForm.remove();
+            });
+        }
+    </script>
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
+    <style>
+        .error {
+            color: #C82829;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
     {{ parent() }}
     <h1>Add a new OC Result</h1>
+    <h4 class="error"> {{ error }} </h4>
     {{ form_start(form) }}
+    <div>
     {{ form_row(form.CPU) }}
     {{ form_row(form.MaxSpeed) }}
     {{ form_row(form.MaxSpeedVoltage) }}
+    </div>
+    <div>
+    <ul class="nodes" data-prototype="{{ form_widget(form.nodes.vars.prototype)|e('html_attr') }}">
+    </ul>
+    </div>
     {{ form_row(form.submit) }}
     {{ form_end(form) }}
 

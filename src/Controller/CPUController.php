@@ -8,6 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class CPUController extends AbstractController
 {
@@ -28,13 +32,15 @@ class CPUController extends AbstractController
      * @param Request $request
      *
      * @return Response
+     *
+     * @throws ExceptionInterface
      */
     public function showCPUsJson(EntityManagerInterface $em, Request $request): Response
     {
+        $serializer = new Serializer([new ObjectNormalizer()]);
         $cpus = $em->getRepository(CPU::class)->findAllContaining($request->query->get('query'));
-        return $this->json([
-            'cpus' => $cpus
-        ]);
+        $cpuJSON = $serializer->normalize($cpus, null, [AbstractNormalizer::ATTRIBUTES => ['Name']]);
 
+        return $this->json($cpuJSON);
     }
 }

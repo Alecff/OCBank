@@ -40,21 +40,27 @@ class ResultController extends AbstractController
         $autoCompleteUrl = $router->generate('get_cpus_json');
         $error = '';
         $this->denyAccessUnlessGranted('ROLE_USER');
-        $form = $this->createForm(ResultFormType::class, null, ['attr' => ['url' => $autoCompleteUrl]]);
+        $form = $this->createForm(ResultFormType::class, ['url' => $autoCompleteUrl]);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $result = new Result();
             $cpu = $em->getRepository(CPU::class)->findOneBy(['Name' => $data['CPU']]);
-            $result
-                ->setCPU($cpu)
-                ->setMaxSpeed($data['MaxSpeed'])
-                ->setMaxSpeedVoltage($data['MaxSpeedVoltage'])
-                ->setUser($this->getUser());
-            $em->persist($result);
-            $em->flush();
-        } else {
-            $error = 'Could not be submitted. Better message TODO.';
+
+            if ($cpu) {
+                $result = new Result();
+                $result
+                    ->setCPU($cpu)
+                    ->setMaxSpeed($data['MaxSpeed'])
+                    ->setMaxSpeedVoltage($data['MaxSpeedVoltage'])
+                    ->setUser($this->getUser());
+                $em->persist($result);
+                $em->flush();
+
+                return $this->redirectToRoute('home');
+            } else {
+                $error = 'CPU does not exist in our database yet.';
+            }
         }
 
         return $this->render('result/new.html.twig', [

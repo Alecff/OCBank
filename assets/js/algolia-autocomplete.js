@@ -8,7 +8,7 @@ $(document).ready(function () {
                         url: autocompleteUrl+'?query='+query,
                         dataType: "json"
                     }).then(function (data) {
-                        cb(data.cpus)
+                        cb(data)
                     })
                 },
                 displayKey: 'Name',

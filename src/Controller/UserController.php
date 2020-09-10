@@ -53,6 +53,20 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/users", name="show_users")
+     *
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
+    public function showUsers(EntityManagerInterface $em): Response
+    {
+        $user = $em->getRepository(User::class)->findAll();
+        return $this->render('user/show.html.twig', [
+            'users' => $user
+        ]);
+    }
+    /**
      * @Route("/", name="home")
      *
      * @return Response

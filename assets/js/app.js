@@ -12,6 +12,7 @@ import '../css/algolia-autocomplete.css';
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 const $ = require('jquery');
 global.$ = global.jQuery = $;
+
 const autocomplete = require('./algolia-autocomplete');
 require('bootstrap');
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
