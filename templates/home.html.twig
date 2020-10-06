@@ -7,14 +7,28 @@
             color: #F5871F;
             text-shadow: 2px 2px 8px #111111;
         }
+
+
     </style>
 {% endblock %}
 
 {% block body %}
     {{ parent() }}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <div class="main">
         <h1>Welcome to OCBank</h1>
         <h3><a href="{{ path('home') }}">View the Bank!</a></h3>
+        <div class="page-item">
+            Every wondered how your overclock stacks up against other similar CPUs? <br>
+            I did, that's why this website exists. <br>
+            Its purpose is to store CPU overclock results for quick comparison.
+        </div>
 
     </div>
 {% endblock %}

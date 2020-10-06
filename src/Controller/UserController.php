@@ -9,9 +9,9 @@ use App\Form\RegisterFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends AbstractController
 {
@@ -66,13 +66,26 @@ class UserController extends AbstractController
             'users' => $user
         ]);
     }
+
+    /**
+     * @Route("users/profile", name="user_profile")
+     * @return Response
+     */
+    public function showProfile(): Response
+    {
+        return $this->render('user/profile.html.twig');
+    }
+
     /**
      * @Route("/", name="home")
      *
+     * @param RequestStack $stack
+     *
      * @return Response
      */
-    public function homeAction(): Response
+    public function homeAction(RequestStack $stack): Response
     {
+
         return $this->render('home.html.twig');
     }
 }

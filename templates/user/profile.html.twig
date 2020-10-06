@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>User Profile:</h1>
+    <h2>{{ app.user.username }}</h2>
+
+{% endblock %}
+

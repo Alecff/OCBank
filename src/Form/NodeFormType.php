@@ -16,14 +16,15 @@ class NodeFormType extends AbstractType
         $builder
             ->add('Clock', NumberType::class)
             ->add('Voltage', NumberType::class)
-            ->add('Proof', FileType::class)
+            ->add('Proof', FileType::class, [
+                'required' => false
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Node::class,
         ]);
     }
 }

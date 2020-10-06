@@ -20,16 +20,6 @@ class Result
     private $id;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    private $MaxSpeed;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $MaxSpeedVoltage;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="results")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -54,30 +44,6 @@ class Result
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMaxSpeed(): ?float
-    {
-        return $this->MaxSpeed;
-    }
-
-    public function setMaxSpeed(float $MaxSpeed): self
-    {
-        $this->MaxSpeed = $MaxSpeed;
-
-        return $this;
-    }
-
-    public function getMaxSpeedVoltage(): ?float
-    {
-        return $this->MaxSpeedVoltage;
-    }
-
-    public function setMaxSpeedVoltage(float $MaxSpeedVoltage): self
-    {
-        $this->MaxSpeedVoltage = $MaxSpeedVoltage;
-
-        return $this;
     }
 
     public function getUser(): ?User

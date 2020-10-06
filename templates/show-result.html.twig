@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        {{ gc_draw(chart, 'table_div') }}
+    </script>
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Average Frequency Curve fitting:</h1>
+    <h3>{{ cpuName }}</h3>
+
+    <div id="table_div"></div>
+
+{% endblock %}

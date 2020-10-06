@@ -23,8 +23,6 @@ class ResultFormType extends AbstractType
                     'class'=> 'js-cpu-class',
                     'data-autocomplete-url' => $url
                 ]])
-            ->add('MaxSpeed', NumberType::class, ['label' => 'Max Speed (GHz)'])
-            ->add('MaxSpeedVoltage', NumberType::class, ['label' => 'Voltage Required'])
             ->add('nodes', CollectionType::class, [
                 'entry_type' => NodeFormType::class,
                 'entry_options' => ['label' => false],

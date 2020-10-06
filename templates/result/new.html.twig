@@ -67,9 +67,7 @@
     <h4 class="error"> {{ error }} </h4>
     {{ form_start(form) }}
     <div>
-    {{ form_row(form.CPU) }}
-    {{ form_row(form.MaxSpeed) }}
-    {{ form_row(form.MaxSpeedVoltage) }}
+        {{ form_row(form.CPU) }}
     </div>
     <div>
     <ul class="nodes" data-prototype="{{ form_widget(form.nodes.vars.prototype)|e('html_attr') }}">

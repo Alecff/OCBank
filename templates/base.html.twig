@@ -16,13 +16,21 @@
                     <div class="navbar-nav mr-auto">
                         <a class="nav-item nav-link active" href="{{ path('home') }}">Home <span class="sr-only">(current)</span></a>
                         <a class="nav-item nav-link" href="{{ path('new_result') }}">Post a Result</a>
-                        <a class="nav-item nav-link" href="#">Results</a>
+                        <a class="nav-item nav-link" href="{{ path('app_result_showresult') }}">Results</a>
                         <a class="nav-item nav-link" href="#">CPUs</a>
+                        <a class="nav-item nav-link" href="{{ path('show_users') }}">Profiles</a>
                     </div>
-                    <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="{{ path('app_login') }}">Login</a>
-                        <a class="nav-item nav-link" href="{{ path('regisiter') }}">Register</a>
-                    </div>
+                    {% if app.user %}
+                        <div class="navbar-nav">
+                            <a class="nav-item nav-link" href="{{ path('user_profile') }}">Profile</a>
+                            <a class="nav-item nav-link" href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% else %}
+                        <div class="navbar-nav">
+                            <a class="nav-item nav-link" href="{{ path('app_login') }}">Login</a>
+                            <a class="nav-item nav-link" href="{{ path('regisiter') }}">Register</a>
+                        </div>
+                    {% endif %}
                 </div>
             </nav>
 
